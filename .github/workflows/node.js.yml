@@ -27,5 +27,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - name: Install Chrome
+      run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+
+    - name: Run tests (Headless)
+      run: npm run test -- --watch=false --browsers=ChromeHeadlessCI
+
+    - name: Build Angular app
+      run: npm run build -- --configuration production
