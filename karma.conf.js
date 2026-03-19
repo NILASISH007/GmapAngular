@@ -32,12 +32,19 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
+    // ✅ ADD THIS HERE
+  customLaunchers: {
+    ChromeHeadlessCI: {
+      base: 'ChromeHeadless',
+      flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage']
+  }
+},
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadlessCI'],
     singleRun: false,
     restartOnFileChange: true
   });
